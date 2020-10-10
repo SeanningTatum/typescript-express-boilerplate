@@ -13,7 +13,7 @@ const app = express();
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 
 // Routes
-app.use(versionOneRoutes);
+app.use('/api/v1', versionOneRoutes);
 
 const server = app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}`);
