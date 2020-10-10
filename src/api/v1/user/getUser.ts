@@ -1,7 +1,8 @@
 import { Request, Response } from 'express';
 import { param, ValidationChain } from 'express-validator';
-import { StatusCodes } from 'http-status-codes';
+import { ReasonPhrases, StatusCodes } from 'http-status-codes';
 import { UserModel } from '~/models/User';
+import { GenericReturn } from '~/types/Return';
 
 /**
  * @swagger
@@ -30,7 +31,7 @@ interface QueryParams {
   id: string;
 }
 
-interface ReturnValue extends UserModel {}
+interface ReturnValue extends GenericReturn<UserModel> {}
 
 export const getUserParams: ValidationChain[] = [
   param('id').trim().exists({ checkFalsy: true, checkNull: true }),
@@ -38,8 +39,12 @@ export const getUserParams: ValidationChain[] = [
 
 function getUser(req: Request<QueryParams>, res: Response<ReturnValue>) {
   return res.status(StatusCodes.OK).json({
-    id: req.params.id,
-    username: 'TestUsername',
+    message: ReasonPhrases.OK,
+    code: StatusCodes.OK,
+    body: {
+      id: req.params.id,
+      username: 'TestUsername',
+    },
   });
 }
 

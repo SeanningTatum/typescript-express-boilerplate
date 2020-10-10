@@ -41,8 +41,6 @@ export const createUserParams = [
 ];
 
 function createUser(req: Request<null, {}, Body>, res: Response<ReturnValue>) {
-  console.log(req.body.username);
-
   return res.status(StatusCodes.OK).json({
     code: StatusCodes.OK,
     message: ReasonPhrases.OK,
