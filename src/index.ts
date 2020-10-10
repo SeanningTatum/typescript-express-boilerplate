@@ -1,10 +1,17 @@
 import express from 'express';
-import routes from './api/v1/index.routes';
+
+import swaggerUI from 'swagger-ui-express';
+import versionOneRoutes from './api/v1/index.routes';
+import swaggerDocs from './config/swagger';
 
 const PORT = Number(process.env.PORT) || 8080;
 const app = express();
 
-app.use('/api/v1', routes);
+// Swagger Setup
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
+
+// Routes
+app.use(versionOneRoutes);
 
 const server = app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}`);
