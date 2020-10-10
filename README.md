@@ -34,6 +34,25 @@ A basic starter template for strongly typed and well documented backend with exp
 │   └── User.ts // swagger and type definition 
 ```
 
+## Setup
+
+run `npm install` or `yarn install`
+
+Make sure you have `nodemon` install globally
+
+*Dev*
+Watches and compiles changes into js file
+
+```
+yarn dev
+```
+
+*Server*
+Runs Compiled JS
+```
+yarn start
+```
+
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
