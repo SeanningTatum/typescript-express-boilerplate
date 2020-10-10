@@ -7,7 +7,7 @@ import { UserModel } from '~/models/User';
  * @swagger
  *
  * /api/v1/user/getUser/{id}:
- *  post:
+ *  get:
  *    description: Fetches user with matching id
  *    produces: application/json
  *    parameters:
@@ -26,7 +26,7 @@ import { UserModel } from '~/models/User';
  *        description: Invalid Body or Params
  *
  */
-interface Params {
+interface QueryParams {
   id: string;
 }
 
@@ -36,7 +36,7 @@ export const getUserParams: ValidationChain[] = [
   param('id').trim().exists({ checkFalsy: true, checkNull: true }),
 ];
 
-function getUser(req: Request<Params>, res: Response<ReturnValue>) {
+function getUser(req: Request<QueryParams>, res: Response<ReturnValue>) {
   return res.status(StatusCodes.OK).json({
     id: req.params.id,
     username: 'TestUsername',

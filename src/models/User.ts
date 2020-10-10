@@ -8,6 +8,9 @@
  *       - username
  *       - password
  *     properties:
+ *       id:
+ *         type: string
+ *         format: id
  *       username:
  *         type: string
  *       password:
