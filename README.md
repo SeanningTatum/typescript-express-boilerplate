@@ -40,14 +40,14 @@ run `npm install` or `yarn install`
 
 Make sure you have `nodemon` install globally
 
-*Dev*
+*Dev* \n
 Watches and compiles changes into js file
 
 ```
 yarn dev
 ```
 
-*Server*
+*Server* \n
 Runs Compiled JS
 ```
 yarn start
