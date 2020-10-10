@@ -30,7 +30,7 @@ import { GenericReturn } from '~/types/Return';
  *        description: Invalid Body or Params
  *
  */
-interface Body {
+interface RequestBody {
     username: string;
 }
 
@@ -40,7 +40,7 @@ export const createUserParams = [
   body('username').exists({ checkNull: true, checkFalsy: true }),
 ];
 
-function createUser(req: Request<null, {}, Body>, res: Response<ReturnValue>) {
+function createUser(req: Request<{}, {}, RequestBody>, res: Response<ReturnValue>) {
   return res.status(StatusCodes.OK).json({
     code: StatusCodes.OK,
     message: ReasonPhrases.OK,
