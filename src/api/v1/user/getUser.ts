@@ -17,6 +17,8 @@ import { Request, Response } from 'express';
  *    responses:
  *      200:
  *        description: Success
+ *        schema:
+ *          $ref: '#/definitions/User'
  *
  */
 interface Params {

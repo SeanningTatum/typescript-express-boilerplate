@@ -14,7 +14,7 @@ const swaggerOptions: swaggerJSDoc.Options = {
     servers: [localServer],
   },
 
-  apis: ['src/api/v1/**/*.ts'],
+  apis: ['src/api/v1/**/*.ts', 'src/models/*.ts'],
 
 };
 
