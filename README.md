@@ -40,14 +40,18 @@ run `npm install` or `yarn install`
 
 Make sure you have `nodemon` install globally
 
-*Dev* \n
+### Swagger Server
+Test and look at API, start development server first then  go to `/api-docs`
+
+
+### Development
 Watches and compiles changes into js file
 
 ```
 yarn dev
 ```
 
-*Server* \n
+### Server
 Runs Compiled JS
 ```
 yarn start
