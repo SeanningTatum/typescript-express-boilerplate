@@ -9,6 +9,7 @@ import { GenericReturn } from '~/types/Return';
  *
  * /api/v1/user/createUser:
  *  post:
+ *    tags: [User]
  *    description: Creates a new user
  *    produces: application/json
  *    parameters:

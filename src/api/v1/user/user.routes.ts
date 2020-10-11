@@ -5,6 +5,12 @@ import getUser, { getUserParams } from './getUser';
 
 const router = Router();
 
+/**
+ * @swagger
+ * tags:
+ *   name: User
+ *   description: User management and login
+ */
 router.get('/getUser/:id', validate(getUserParams), getUser);
 router.post('/createUser', validate(createUserParams), createUser);
 

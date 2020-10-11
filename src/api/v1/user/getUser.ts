@@ -8,7 +8,9 @@ import { GenericReturn } from '~/types/Return';
  * @swagger
  *
  * /api/v1/user/getUser/{id}:
+
  *  get:
+ *    tags: [User]
  *    description: Fetches user with matching id
  *    produces: application/json
  *    parameters:
