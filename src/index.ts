@@ -7,7 +7,7 @@ import swaggerUI from 'swagger-ui-express';
 import versionOneRoutes from './api/v1/index.routes';
 import swaggerDocs from './config/swagger';
 
-const PORT = Number(process.env.PORT) || 8080;
+const PORT = Number(process.env.PORT) || 5000;
 const app = express();
 
 // Body Parser
