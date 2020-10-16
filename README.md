@@ -4,7 +4,7 @@ A basic starter template for strongly typed and well documented backend with exp
 
 ## Libraries
 
-- Swagger - [Docs](https://swagger.io/), [Examples](https://github.com/Surnet/swagger-jsdoc/blob/master/docs/GETTING-STARTED.md)
+- Swagger - [Docs](https://swagger.io/), [Example 1](https://github.com/Surnet/swagger-jsdoc/blob/master/docs/GETTING-STARTED.md) [Example 2](https://github.com/Surnet/swagger-jsdoc/blob/master/example/v2/routes.js)
 - Typescript - [Docs](https://www.typescriptlang.org/docs/)
 - Express - [Docs](https://expressjs.com/)
 - Express Validator - [Docs](https://express-validator.github.io/docs/)
