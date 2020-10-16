@@ -36,27 +36,22 @@ A basic starter template for strongly typed and well documented backend with exp
 │   └── User.ts // swagger and type definition 
 ```
 
-## Setup
+## Setup and How to run
 
 run `npm install` or `yarn install`
 
-Make sure you have `nodemon` install globally
+have `docker` and `docker-compose` installed on your machine
 
-### Swagger Server
-Test and look at API, start development server first then  go to `/api-docs`
+`$ docker-compose up`
 
-### Development
-Watches and compiles changes into js file
+This command will start nodejs api and mongo service inside docker.
 
-```
-yarn dev
-```
+| Service       | Port                                             |
+| ------------- | ------------------------------------------------ |
+| API           | [5000](https://localhost:5000)                   |
+| Swagger UI    | [5000/api-docs](http://localhost:5000/api-docs)  |
+| Mongo         | 27018                                            |
 
-### Server
-Runs Compiled JS
-```
-yarn start
-```
 
 ### Templates
 
