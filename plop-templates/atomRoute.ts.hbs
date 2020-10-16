@@ -10,7 +10,7 @@ import { GenericReturn } from '~/types/Return';
  * /api/{{lowerCase version}}/{{lowerCase rootRoute}}/{{pascalCase routeName}}:
  *  post:
  *    tags: [{{pascalCase rootRoute}}]
- *    description: Create / Fetch / Update / Delete {{lowerCase routeName}}
+ *    description: {{upperCase method}} {{camelCase routeName}}
  *    produces: application/json
  *    parameters:
  *      - name: {{lowerCase rootRoute}}
@@ -35,7 +35,7 @@ interface RequestBody {
     id: string;
 }
 
-interface ReturnValue extends GenericReturn<UserModel> {}
+interface ReturnValue extends GenericReturn<{{pascalCase rootRoute}}Model> {}
 
 export const {{camelCase routeName}}Params = [
   body('id').exists({ checkNull: true, checkFalsy: true }),
