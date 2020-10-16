@@ -49,7 +49,8 @@ This command will start nodejs api and mongo service inside docker.
 | Service       | Port                                             |
 | ------------- | ------------------------------------------------ |
 | API           | [5000](https://localhost:5000)                   |
-| Swagger UI    | [5000/api-docs](http://localhost:5000/api-docs)  |
+| Swagger UI    | [5000/api-docs](https://localhost:5000/api-docs)  |
+| Mongo Express | [5001](https://localhost:5001)  |
 | Mongo         | 27018                                            |
 
 

@@ -11,6 +11,7 @@ services:
     # environment:
     #   MONGO_INITDB_ROOT_USERNAME: username
     #   MONGO_INITDB_ROOT_PASSWORD: password
+
   nodejs:
     image: node:12.16.3-alpine
     command: sh -c "npm install && npm run dev"
@@ -19,5 +20,13 @@ services:
     working_dir: /root/app
     volumes:
       - ./:/root/app:cached
+    depends_on:
+      - mongo
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 5001:8081
     depends_on:
       - mongo
