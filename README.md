@@ -43,7 +43,6 @@ Make sure you have `nodemon` install globally
 ### Swagger Server
 Test and look at API, start development server first then  go to `/api-docs`
 
-
 ### Development
 Watches and compiles changes into js file
 
@@ -55,6 +54,42 @@ yarn dev
 Runs Compiled JS
 ```
 yarn start
+```
+
+### Templates
+
+Listed below are `plop` templates to help speed up development time. Generated code already handles types, boilerplate code and swagger definition.
+
+Just run `npm run generate` or `yarn generate` and you'll be prompted to choose a `model`, `rootRoute` or `atomRoute`
+
+```cli
+sean@Seans-MacBook-Pro-2 express-typescript % yarn generate
+? [PLOP] Please choose a generator. (Use arrow keys)
+❯ model - Create a model 
+  rootRoute - Creates a parent route 
+  atomRoute - Creates a atomic route 
+
+? [PLOP] Please choose a generator. model - Create a model
+? What is your model name? (ex: User):  Property
+✔  ++ /src/models/Property.ts
+
+sean@Seans-MacBook-Pro-2 express-typescript % yarn generate
+? [PLOP] Please choose a generator. rootRoute - Creates a parent route
+? What is your rootRoute name? (ex: user):  Property
+? What version? (ex: v1, v2):  v1
+✔  ++ /src/api/v1/property/property.routes.ts
+✔  _+ /src/api/v1/index.routes.ts
+✔  _+ /src/api/v1/index.routes.ts
+
+sean@Seans-MacBook-Pro-2 express-typescript % yarn generate
+? [PLOP] Please choose a generator. atomRoute - Creates a atomic route
+? What is the rootRoute name? (ex: user):  property
+? What version? (ex: v1, v2):  v1
+? What is the routeName? (ex: createUser):  createProperty
+? What HTTP method?:  post
+✔  ++ /src/api/v1/property/createProperty.ts
+✔  _+ /src/api/v1/property/property.routes.ts
+✔  _+ /src/api/v1/property/property.routes.ts
 ```
 
 ## Contributing
