@@ -9,6 +9,7 @@ A basic starter template for strongly typed and well documented backend with exp
 - Express - [Docs](https://expressjs.com/)
 - Express Validator - [Docs](https://express-validator.github.io/docs/)
 - http-status-codes - [Docs](https://www.npmjs.com/package/http-status-codes)
+- plop - [Docs](https://github.com/plopjs/plop)
 
 ## Features
 
@@ -17,6 +18,7 @@ A basic starter template for strongly typed and well documented backend with exp
 - Documented APIs that can be easily tested at `/api-docs` through `swagger`
 - Reusable and generic HTTP status codes and messages through `http-status-codes`
 - Validate Route Params and Body through `express-validator`
+- Generated boilerplate code through `plop`
 
 ```javascript
 ├── api
