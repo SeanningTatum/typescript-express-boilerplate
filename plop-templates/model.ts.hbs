@@ -1,3 +1,5 @@
+import mongoose, { Schema, Document } from 'mongoose';
+
 /**
  * @swagger
  *
@@ -5,11 +7,23 @@
  *   {{pascalCase name}}:
  *     type: object
  *     required:
- *       - id
+ *       - sample
  *     properties:
  *       id:
  *         type: string
+ *         format: id
+ *        sample:
+ *          type: string
  */
-export interface {{pascalCase name}}Model {
-    id: string;
+
+export interface I{{pascalCase name}} extends Document {
+    // TODO: Add properties 
+    sample: string;
 }
+
+const {{pascalCase name}}Schema = new Schema({
+  // TODO: Add properties 
+  sample: { type: String, required: true },
+});
+
+export default mongoose.model<I{{pascalCase name}}>('{{pascalCase name}}', {{pascalCase name}}Schema);
