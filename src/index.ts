@@ -7,8 +7,8 @@ import swaggerUI from 'swagger-ui-express';
 import versionOneRoutes from './api/v1/index.routes';
 import swaggerDocs from './config/swagger';
 import connectToMongoDb from './config/mongo';
+import { PORT } from './constants/config';
 
-const PORT = Number(process.env.PORT) || 5000;
 const app = express();
 
 // MongoDB Setup

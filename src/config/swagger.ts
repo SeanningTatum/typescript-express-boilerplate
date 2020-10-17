@@ -1,7 +1,8 @@
 import swaggerJSDoc from 'swagger-jsdoc';
+import { PORT } from '~/constants/config';
 
 const localServer: swaggerJSDoc.ServerInformation = {
-  url: 'http://localhost:8080',
+  url: `http://localhost:${PORT}`,
 };
 
 const swaggerOptions: swaggerJSDoc.Options = {
