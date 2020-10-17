@@ -13,7 +13,7 @@ const router = Router();
  *   description: User management and login
  */
 /* PLOP_INJECT_ROUTE */
-router.get('/getUser/:id', validate(getUserParams), getUser);
+router.post('/getUser', validate(getUserParams), getUser);
 router.post('/createUser', validate(createUserParams), createUser);
 
 export default router;

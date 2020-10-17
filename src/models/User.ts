@@ -1,3 +1,5 @@
+import mongoose, { Schema, Document } from 'mongoose';
+
 /**
  * @swagger
  *
@@ -5,19 +7,28 @@
  *   User:
  *     type: object
  *     required:
- *       - username
+ *       - email
  *       - password
  *     properties:
  *       id:
  *         type: string
  *         format: id
- *       username:
+ *       email:
  *         type: string
+ *         format: email
  *       password:
  *         type: string
  *         format: password
  */
-export interface UserModel {
-    id: string;
-    username: string;
+
+export interface IUser extends Document {
+    email: string;
+    password: string;
 }
+
+const UserSchema = new Schema({
+  email: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
+});
+
+export default mongoose.model<IUser>('User', UserSchema);

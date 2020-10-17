@@ -1,7 +1,8 @@
 import { Response, Request } from 'express';
 import { body } from 'express-validator';
 import { ReasonPhrases, StatusCodes } from 'http-status-codes';
-import { UserModel } from '~/models/User';
+import User, { IUser } from '~/models/User';
+import { GenericError } from '~/types/Error';
 import { GenericReturn } from '~/types/Return';
 
 /**
@@ -18,9 +19,12 @@ import { GenericReturn } from '~/types/Return';
  *        schema:
  *          type: object
  *          required:
- *            - username
+ *            - email
+ *            - password
  *          properties:
- *            username:
+ *            email:
+ *              type: string
+ *            password:
  *              type: string
  *    responses:
  *      200:
@@ -32,24 +36,42 @@ import { GenericReturn } from '~/types/Return';
  *
  */
 interface RequestBody {
-    username: string;
+  email: string;
+  password: string
 }
 
-interface ReturnValue extends GenericReturn<UserModel> {}
+type ReturnedUser = Omit<IUser, 'password'>
+
+type ReturnValue = GenericReturn<ReturnedUser> | GenericError
 
 export const createUserParams = [
-  body('username').exists({ checkNull: true, checkFalsy: true }),
+  body('email').exists({ checkNull: true, checkFalsy: true }),
+  body('password').exists({ checkNull: true, checkFalsy: true }),
 ];
 
-function createUser(req: Request<{}, {}, RequestBody>, res: Response<ReturnValue>) {
-  return res.status(StatusCodes.OK).json({
-    code: StatusCodes.OK,
-    message: ReasonPhrases.OK,
-    body: {
-      id: 'testId',
-      username: req.body.username,
-    },
-  });
+async function createUser(req: Request<{}, {}, RequestBody>, res: Response<ReturnValue>) {
+  try {
+    // Omit password from user
+    const { password, ...user } = await User.create({ ...req.body });
+
+    if (!user) {
+      return res.status(StatusCodes.NOT_FOUND).json({
+        code: StatusCodes.NOT_FOUND,
+        message: ReasonPhrases.NOT_FOUND,
+      });
+    }
+
+    return res.status(StatusCodes.OK).json({
+      code: StatusCodes.OK,
+      message: ReasonPhrases.OK,
+      body: user as ReturnedUser,
+    });
+  } catch (error) {
+    return res.status(error.code).json({
+      code: error.code,
+      message: error.message,
+    });
+  }
 }
 
 export default createUser;

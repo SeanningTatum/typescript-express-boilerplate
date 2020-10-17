@@ -1,24 +1,28 @@
 import { Request, Response } from 'express';
-import { param, ValidationChain } from 'express-validator';
+import { body, ValidationChain } from 'express-validator';
 import { ReasonPhrases, StatusCodes } from 'http-status-codes';
-import { UserModel } from '~/models/User';
+import User, { IUser } from '~/models/User';
+import { GenericError } from '~/types/Error';
 import { GenericReturn } from '~/types/Return';
 
 /**
  * @swagger
  *
- * /api/v1/user/getUser/{id}:
- *  get:
+ * /api/v1/user/getUser:
+ *  post:
  *    tags: [User]
- *    description: Fetches user with matching id
+ *    description: Creates a new user
  *    produces: application/json
  *    parameters:
- *      - name: id
- *        in: path
+ *      - name: user
+ *        in: body
  *        schema:
- *          type: string
- *        required: true
- *        description: ID of the user
+ *          type: object
+ *          required:
+ *            - email
+ *          properties:
+ *            email:
+ *              type: string
  *    responses:
  *      200:
  *        description: Success
@@ -29,23 +33,29 @@ import { GenericReturn } from '~/types/Return';
  *
  */
 interface QueryParams {
-  id: string;
+  email: string;
 }
 
-interface ReturnValue extends GenericReturn<UserModel> {}
+type ReturnValue = GenericReturn<IUser> | GenericError
 
 export const getUserParams: ValidationChain[] = [
-  param('id').trim().exists({ checkFalsy: true, checkNull: true }),
+  body('email').trim().exists({ checkFalsy: true, checkNull: true }),
 ];
 
-function getUser(req: Request<QueryParams>, res: Response<ReturnValue>) {
+async function getUser(req: Request<QueryParams>, res: Response<ReturnValue>) {
+  const user = await User.findOne({ email: req.body.email });
+
+  if (!user) {
+    return res.status(StatusCodes.NOT_FOUND).json({
+      code: StatusCodes.NOT_FOUND,
+      message: ReasonPhrases.NOT_FOUND,
+    });
+  }
+
   return res.status(StatusCodes.OK).json({
-    message: ReasonPhrases.OK,
     code: StatusCodes.OK,
-    body: {
-      id: req.params.id,
-      username: 'TestUsername',
-    },
+    message: ReasonPhrases.OK,
+    body: user,
   });
 }
 
