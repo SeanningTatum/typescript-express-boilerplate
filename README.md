@@ -1,4 +1,4 @@
-# Typescript + Express + Swagger Boilerplate
+# Typescript + Express + Swagger + MongoDB Boilerplate
 
 A basic starter template for strongly typed and well documented backend with express
 
