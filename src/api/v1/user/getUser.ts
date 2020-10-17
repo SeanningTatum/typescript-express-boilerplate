@@ -28,7 +28,7 @@ import { GenericReturn } from '~/types/Return';
  *        description: Success
  *        schema:
  *          $ref: '#/definitions/User'
- *      400:
+ *      404:
  *        description: Invalid Body or Params
  *
  */
@@ -36,14 +36,17 @@ interface QueryParams {
   email: string;
 }
 
-type ReturnValue = GenericReturn<IUser> | GenericError
+type ReturnedUser = Omit<IUser, 'password'>
+
+type ReturnValue = GenericReturn<ReturnedUser> | GenericError
 
 export const getUserParams: ValidationChain[] = [
   body('email').trim().exists({ checkFalsy: true, checkNull: true }),
 ];
 
 async function getUser(req: Request<QueryParams>, res: Response<ReturnValue>) {
-  const user = await User.findOne({ email: req.body.email });
+  // Omit password
+  const user = await User.findOne({ email: req.body.email }).select('-password');
 
   if (!user) {
     return res.status(StatusCodes.NOT_FOUND).json({

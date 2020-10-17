@@ -32,7 +32,7 @@ import { GenericReturn } from '~/types/Return';
  *        schema:
  *          $ref: '#/definitions/User'
  *      400:
- *        description: Invalid Body or Params
+ *        description: Invalid Request Body
  *
  */
 interface RequestBody {
@@ -40,9 +40,7 @@ interface RequestBody {
   password: string
 }
 
-type ReturnedUser = Omit<IUser, 'password'>
-
-type ReturnValue = GenericReturn<ReturnedUser> | GenericError
+type ReturnValue = GenericReturn<IUser> | GenericError
 
 export const createUserParams = [
   body('email').exists({ checkNull: true, checkFalsy: true }),
@@ -51,20 +49,12 @@ export const createUserParams = [
 
 async function createUser(req: Request<{}, {}, RequestBody>, res: Response<ReturnValue>) {
   try {
-    // Omit password from user
-    const { password, ...user } = await User.create({ ...req.body });
-
-    if (!user) {
-      return res.status(StatusCodes.NOT_FOUND).json({
-        code: StatusCodes.NOT_FOUND,
-        message: ReasonPhrases.NOT_FOUND,
-      });
-    }
+    const user = await User.create({ ...req.body });
 
     return res.status(StatusCodes.OK).json({
       code: StatusCodes.OK,
       message: ReasonPhrases.OK,
-      body: user as ReturnedUser,
+      body: user,
     });
   } catch (error) {
     return res.status(error.code).json({
