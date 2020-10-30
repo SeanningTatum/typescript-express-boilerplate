@@ -6,16 +6,29 @@ const localServer: swaggerJSDoc.ServerInformation = {
 
 const swaggerOptions: swaggerJSDoc.Options = {
   swaggerDefinition: {
+    openapi: '3.0.1',
     info: {
-      title: 'Hello World',
+      title: 'Bank Accounts',
       version: '1.0.0',
-      description: 'A sample API',
+      description: 'Simplies bank functions ex: (Texting you when your salary arrives)',
     },
     servers: [localServer],
+    components: {
+      securitySchemes: {
+        bearerAuth: {
+          type: 'http',
+          scheme: 'bearer',
+          bearerFormat: 'JWT',
+        },
+      },
+      security: [
+        {
+          bearerAuth: [],
+        },
+      ],
+    },
   },
-
-  apis: ['src/api/v1/**/*.ts', 'src/models/*.ts'],
-
+  apis: ['src/api/v1/**/_swagger_/*.yml', 'src/models/_swagger_/*.yml'],
 };
 
 const swaggerDocs = swaggerJSDoc(swaggerOptions);

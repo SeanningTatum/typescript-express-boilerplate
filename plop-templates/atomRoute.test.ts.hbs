@@ -1,0 +1,16 @@
+import request from 'supertest';
+import app from '~/index';
+
+describe('[{{upperCase method}}] {{pascalCase rootRoute}} - {{pascalCase routeName}}', () => {
+  it('should create a new user', async () => {
+    const res = await request(app)
+      .post('/api/{{lowerCase version}}/{{lowerCase rootRoute}}/{{pascalCase routeName}}')
+      .send({
+        // TODO: Change Values
+        username: '',
+        password: '',
+      });
+    expect(res.status).toEqual(200);
+    // expect(res.body).toHaveProperty('post');
+  });
+});

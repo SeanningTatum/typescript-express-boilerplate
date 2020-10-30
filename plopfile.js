@@ -85,8 +85,28 @@ module.exports = function plopGenerator(plop) {
     actions: [
       {
         type: 'add',
-        path: 'src/api/{{lowerCase version}}/{{camelCase rootRoute}}/{{camelCase routeName}}.ts',
+        path: 'src/api/{{lowerCase version}}/{{camelCase rootRoute}}/{{camelCase routeName}}/{{camelCase routeName}}.ts',
         templateFile: 'plop-templates/atomRoute.ts.hbs',
+      },
+      {
+        type: 'add',
+        path: 'src/api/{{lowerCase version}}/{{camelCase rootRoute}}/{{camelCase routeName}}/{{camelCase routeName}}.yml',
+        templateFile: 'plop-templates/atomRoute.swagger.yml.hbs',
+      },
+      {
+        type: 'add',
+        path: 'src/api/{{lowerCase version}}/{{camelCase rootRoute}}/{{camelCase routeName}}/{{camelCase routeName}}.test.ts',
+        templateFile: 'plop-templates/atomRoute.test.ts.hbs',
+      },
+      {
+        type: 'add',
+        path: 'src/api/{{lowerCase version}}/{{camelCase rootRoute}}/{{camelCase routeName}}/{{camelCase routeName}}.params.ts',
+        templateFile: 'plop-templates/atomRoute.params.ts.hbs',
+      },
+      {
+        type: 'add',
+        path: 'src/api/{{lowerCase version}}/{{camelCase rootRoute}}/{{camelCase routeName}}/index.ts',
+        templateFile: 'plop-templates/atomRoute.index.ts.hbs',
       },
       {
         type: 'append',

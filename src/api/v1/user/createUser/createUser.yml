@@ -1,0 +1,32 @@
+paths:
+  /api/v1/user/createUser:
+    post:
+      tags: [User]
+      summary: POST Create User
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - username
+                - password
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+                  format: password
+      responses:
+        200:
+          description: Success
+        400:
+          description: Invalid Body or Params
+        401:
+          description: Unauthorized, Bearer Token is required
+        422:
+          description: User is already created
+        500:
+          description: Internal Server Error
