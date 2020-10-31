@@ -2,9 +2,10 @@ import request from 'supertest';
 import app from '~/index';
 
 describe('[{{upperCase method}}] {{pascalCase rootRoute}} - {{pascalCase routeName}}', () => {
-  it('should create a new user', async () => {
+  // TODO: Change Description
+  it('should do something here', async () => {
     const res = await request(app)
-      .post('/api/{{lowerCase version}}/{{lowerCase rootRoute}}/{{pascalCase routeName}}')
+      .post('/api/{{lowerCase version}}/{{lowerCase rootRoute}}/{{camelCase routeName}}')
       .send({
         // TODO: Change Values
         username: '',
