@@ -8,9 +8,9 @@ const swaggerOptions: swaggerJSDoc.Options = {
   swaggerDefinition: {
     openapi: '3.0.1',
     info: {
-      title: 'Bank Accounts',
-      version: '1.0.0',
-      description: 'Simplies bank functions ex: (Texting you when your salary arrives)',
+      title: 'YOUR_APP_NAME_HERE',
+      version: '0.0.1',
+      description: 'YOUR_APP_DESCRIPTION_HERE',
     },
     servers: [localServer],
     components: {
@@ -28,7 +28,7 @@ const swaggerOptions: swaggerJSDoc.Options = {
       ],
     },
   },
-  apis: ['src/api/v1/**/_swagger_/*.yml', 'src/models/_swagger_/*.yml'],
+  apis: ['src/api/v1/**/**/*.yml', 'src/api/v1/**/*.ts', 'src/models/_swagger_/*.yml'],
 };
 
 const swaggerDocs = swaggerJSDoc(swaggerOptions);
