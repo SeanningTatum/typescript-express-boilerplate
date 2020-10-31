@@ -2,7 +2,6 @@ import { Router } from 'express';
 import validate from '~/utils/validate';
 /* PLOP_INJECT_IMPORT */
 import createUser, { createUserParams } from './createUser';
-import getUser, { getUserParams } from './getUser';
 
 const router = Router();
 
@@ -13,7 +12,6 @@ const router = Router();
  *   description: User management and login
  */
 /* PLOP_INJECT_ROUTE */
-router.post('/getUser', validate(getUserParams), getUser);
 router.post('/createUser', validate(createUserParams), createUser);
 
 export default router;

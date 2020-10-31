@@ -1,0 +1,32 @@
+import { Response, Request } from 'express';
+import { body } from 'express-validator';
+
+import { ReasonPhrases, StatusCodes } from 'http-status-codes';
+import { {{pascalCase rootRoute}}Model } from '~/models/{{pascalCase rootRoute}}';
+import { GenericReturn } from '~/types/Return';
+
+export const {{camelCase routeName}}Params = [
+  body('id').exists({ checkNull: true, checkFalsy: true }),
+];
+
+export interface RequestBody {
+  id: string;
+}
+
+export type ReturnValue = GenericReturn<{{pascalCase rootRoute}}Model>
+
+function {{camelCase routeName}}(req: Request<{}, {}, RequestBody>, res: Response<ReturnValue>) {
+
+  // Logic CRUD to database
+  const mock{{pascalCase rootRoute}} = {
+    id: req.body.id,
+   }
+
+  return res.status(StatusCodes.OK).json({
+    code: StatusCodes.OK,
+    message: ReasonPhrases.OK,
+    body: mock{{pascalCase rootRoute}},
+  });
+}
+
+export default {{camelCase routeName}};

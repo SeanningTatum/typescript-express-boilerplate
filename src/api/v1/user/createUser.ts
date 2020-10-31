@@ -5,36 +5,6 @@ import User, { IUser } from '~/models/User';
 import { GenericError } from '~/types/Error';
 import { GenericReturn } from '~/types/Return';
 
-/**
- * @swagger
- *
- * /api/v1/user/createUser:
- *  post:
- *    tags: [User]
- *    description: Creates a new user
- *    produces: application/json
- *    parameters:
- *      - name: user
- *        in: body
- *        schema:
- *          type: object
- *          required:
- *            - email
- *            - password
- *          properties:
- *            email:
- *              type: string
- *            password:
- *              type: string
- *    responses:
- *      200:
- *        description: Success
- *        schema:
- *          $ref: '#/definitions/User'
- *      400:
- *        description: Invalid Request Body
- *
- */
 interface RequestBody {
   email: string;
   password: string

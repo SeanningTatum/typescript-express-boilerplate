@@ -17,6 +17,11 @@ module.exports = function plopGenerator(plop) {
         path: 'src/models/{{pascalCase name}}.ts',
         templateFile: 'plop-templates/model.ts.hbs',
       },
+      {
+        type: 'add',
+        path: 'src/models/_swagger_/{{pascalCase name}}.yml',
+        templateFile: 'plop-templates/model.swagger.yml.hbs',
+      },
     ],
   });
 
@@ -86,7 +91,17 @@ module.exports = function plopGenerator(plop) {
       {
         type: 'add',
         path: 'src/api/{{lowerCase version}}/{{camelCase rootRoute}}/{{camelCase routeName}}.ts',
-        templateFile: 'plop-templates/atomRoute.ts.hbs',
+        templateFile: 'plop-templates/atomRoute.index.ts.hbs',
+      },
+      {
+        type: 'add',
+        path: 'src/api/{{lowerCase version}}/{{camelCase rootRoute}}/_swagger_/{{camelCase routeName}}.yml',
+        templateFile: 'plop-templates/atomRoute.swagger.yml.hbs',
+      },
+      {
+        type: 'add',
+        path: 'src/api/{{lowerCase version}}/{{camelCase rootRoute}}/_tests_/{{camelCase routeName}}.test.ts',
+        templateFile: 'plop-templates/atomRoute.test.ts.hbs',
       },
       {
         type: 'append',
