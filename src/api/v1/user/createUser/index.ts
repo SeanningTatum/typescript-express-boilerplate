@@ -7,8 +7,8 @@ import { UserModel } from '~/models/User';
 import { GenericReturn } from '~/types/Return';
 
 interface RequestBody {
-    username: string;
-    password: string;
+  username: string;
+  password: string;
 }
 
 type ReturnValue = GenericReturn<UserModel>
@@ -23,8 +23,8 @@ function createUser(req: Request<{}, {}, RequestBody>, res: Response<ReturnValue
     code: StatusCodes.OK,
     message: ReasonPhrases.OK,
     body: {
-      id: 'testId',
-      username: req.body.username,
+      id: 'testValue',
+      ...req.body,
     },
   });
 }
