@@ -1,4 +1,5 @@
 import './moduleAlias';
+import dotenv from 'dotenv';
 
 import express from 'express';
 
@@ -8,6 +9,8 @@ import versionOneRoutes from './api/v1/index.routes';
 import swaggerDocs from './config/swagger';
 import connectToMongoDb from './config/mongo';
 import { PORT } from './constants/config';
+
+dotenv.config();
 
 const app = express();
 

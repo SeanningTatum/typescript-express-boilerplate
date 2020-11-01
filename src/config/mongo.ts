@@ -8,8 +8,8 @@ const uri = `mongodb://${credential}${MONGO.HOST}:${MONGO.PORT}/${MONGO.DB}`;
 
 mongoose.connect(uri);
 
-function connectToMongoDb() {
-  mongoose.connect(uri)
+async function connectToMongoDb() {
+  return mongoose.connect(uri)
     .then(() => {
       console.log(`Connected to MongoDB "${MONGO.HOST}:${MONGO.PORT}"`);
     })

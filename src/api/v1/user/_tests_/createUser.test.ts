@@ -1,38 +1,35 @@
 import { ReasonPhrases, StatusCodes } from 'http-status-codes';
 import request from 'supertest';
 import app from '~/index';
-import { GenericReturn } from '~/types/Return';
-import { UserModel } from '~/models/User';
+import { IUser } from '~/models/User';
 
 describe('[POST] User - createUser', () => {
-  beforeAll(() => {
-    // Add connection to database here
-  });
-
   it('should create a new user', async () => {
-    const res = await request(app)
-      .post('/api/v1/user/createUser')
-      .send({
-        username: 'test is cool',
-        password: '123456',
-      });
-
-    const success: GenericReturn<UserModel> = {
-      body: {
-        id: 'testValue',
-        username: 'test is cool',
-        password: '123456',
-      },
-      code: StatusCodes.OK,
-      message: ReasonPhrases.OK,
+    const testUser = {
+      email: 'test@gmail.com',
+      password: '123456',
     };
 
-    expect(res.status).toEqual(200);
-    expect(res.body).toStrictEqual(success);
+    const res = await request(app)
+      .post('/api/v1/user/createUser')
+      .send(testUser);
+
+    // Verify Codes
+    expect(res.status).toEqual(StatusCodes.OK);
+    expect(res.body.code).toEqual(StatusCodes.OK);
+    expect(res.body.message).toEqual(ReasonPhrases.OK);
+
+    const { email, password } = res.body as IUser;
+
+    // Verify user has been created and sent back as a response
+    expect(email).toBe(testUser.email);
+
+    // Verify Password exists and is hashed
+    expect(password).toBeDefined();
+    expect(password).not.toBe(testUser.password);
   });
 
   afterAll((done) => {
-    // Close server
     app.close();
     done();
   });
