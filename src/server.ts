@@ -10,10 +10,11 @@ import connectToMongoDb from './config/mongo';
 
 dotenv.config();
 
-// dotenv.config();
-
 export default function createServer(test?: boolean) {
   const server = express();
+
+  // MongoDB Setup
+  connectToMongoDb(test);
 
   // Body Parser
   server.use(bodyParser.json());
@@ -22,13 +23,8 @@ export default function createServer(test?: boolean) {
   server.use('/api/v1', versionOneRoutes);
 
   if (!test) {
-    // MongoDB Setup
-    connectToMongoDb();
-
     // Swagger Setup
     server.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
-  } else {
-    connectToMongoDb(true);
   }
 
   return server;
