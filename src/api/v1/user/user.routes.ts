@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import validate from '~/utils/validate';
+import validate from '~/middleware/validate';
 /* PLOP_INJECT_IMPORT */
 import createUser, { createUserParams } from './createUser';
 

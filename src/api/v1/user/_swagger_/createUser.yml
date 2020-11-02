@@ -3,8 +3,6 @@ paths:
     post:
       tags: [User]
       summary: POST Create User
-      security:
-        - bearerAuth: []
       requestBody:
         content:
           application/json:
