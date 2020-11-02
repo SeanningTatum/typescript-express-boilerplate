@@ -1,21 +1,5 @@
 import mongoose, { Schema, Document } from 'mongoose';
 
-/**
- * @swagger
- *
- * definitions:
- *   {{pascalCase name}}:
- *     type: object
- *     required:
- *       - sample
- *     properties:
- *       id:
- *         type: string
- *         format: id
- *        sample:
- *          type: string
- */
-
 export interface I{{pascalCase name}} extends Document {
     // TODO: Add properties 
     sample: string;

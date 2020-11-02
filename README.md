@@ -100,6 +100,12 @@ sean@Seans-MacBook-Pro-2 express-typescript % yarn generate
 ```
 
 ### Testing
+Make sure you're inside the nodejs docker-container before you start testing.
+```
+npm run sh:nodejs or yarn sh:nodejs
+```
+
+
 Make sure each model has a unit test to validate the schema.
 
 ```
