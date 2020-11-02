@@ -46,14 +46,12 @@
     "ts-jest": "^26.4.3"
   },
   "scripts": {
-    "dev": "concurrently \"npm run watch-ts\" \"npm run watch-deploy\"",
+    "dev": "concurrently \"tsc -w\" \"nodemon dist/server.js\"",
     "build": "tsc -p .",
-    "watch-ts": "tsc -w",
-    "watch-deploy": "nodemon dist/index.js",
-    "start": "yarn build && node dist/index.js",
+    "start": "yarn build && node dist/server.js",
     "generate": "plop",
-    "test:dev": "jest src --watch",
-    "test:prod": "npm run build && jest dist",
+    "unit-test": "jest src/models",
+    "integration-test": "jest src/api",
     "sh:nodejs": "docker-compose exec nodejs sh",
     "sh:mongo": "docker-compose exec mongo sh"
   },
@@ -73,7 +71,7 @@
       "/node_modules/"
     ],
     "moduleNameMapper": {
-      "~/(.*)": "<rootDir>/dist/$1"
+      "~/(.*)": "<rootDir>/src/$1"
     }
   }
 }

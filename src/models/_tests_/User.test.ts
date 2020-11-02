@@ -1,6 +1,7 @@
 /* eslint-disable no-underscore-dangle */
-import mongoose from 'mongoose';
-import { uri } from '~/config/mongo';
+
+import connectToMongoDb from '~/config/mongo';
+
 import User from '../User';
 
 const testUserData = {
@@ -8,15 +9,9 @@ const testUserData = {
   password: '12345678',
 };
 
-describe('[User Model Test]', () => {
+describe('[User Model]', () => {
   beforeAll(async () => {
-    await mongoose.connect(uri,
-      { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true }, (err) => {
-        if (err) {
-          console.error(err);
-          process.exit(1);
-        }
-      });
+    await connectToMongoDb(true);
   });
 
   it('should create & save user successfully', async (done) => {
@@ -33,7 +28,7 @@ describe('[User Model Test]', () => {
   });
 
   afterAll(async (done) => {
-    // await User.deleteMany({});
+    await User.deleteMany({});
     done();
   });
 });

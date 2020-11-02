@@ -1,5 +1,5 @@
 import './moduleAlias';
-
+import dotenv from 'dotenv';
 import express from 'express';
 
 import bodyParser from 'body-parser';
@@ -8,22 +8,28 @@ import versionOneRoutes from './api/v1/index.routes';
 import swaggerDocs from './config/swagger';
 import connectToMongoDb from './config/mongo';
 
-require('dotenv').config();
+dotenv.config();
 
 // dotenv.config();
 
-const server = express();
+export default function createServer(test?: boolean) {
+  const server = express();
 
-// MongoDB Setup
-connectToMongoDb();
+  // Body Parser
+  server.use(bodyParser.json());
 
-// Body Parser
-server.use(bodyParser.json());
+  // Routes
+  server.use('/api/v1', versionOneRoutes);
 
-// Swagger Setup
-server.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
+  if (!test) {
+    // MongoDB Setup
+    connectToMongoDb();
 
-// Routes
-server.use('/api/v1', versionOneRoutes);
+    // Swagger Setup
+    server.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
+  } else {
+    connectToMongoDb(true);
+  }
 
-export default server;
+  return server;
+}

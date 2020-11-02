@@ -1,21 +1,24 @@
 /* eslint-disable radix */
 import mongoose from 'mongoose';
-import { MONGO } from '~/constants/config';
+import { uri, testUri } from '~/constants/config';
 
-const credential = MONGO.USER && MONGO.PASSWORD ? `${MONGO.USER}:${MONGO.PASSWORD}@` : '';
-
-// If we're running test run it on local server
-export const uri = `mongodb://${credential}${MONGO.HOST}:${MONGO.PORT}/${MONGO.DB}`;
-
-mongoose.connect(uri);
-
-async function connectToMongoDb() {
-  return mongoose.connect(uri)
-    .then(() => {
-      console.log(`Connected to MongoDB "${MONGO.HOST}:${MONGO.PORT}"`);
+async function connectToMongoDb(test?: boolean) {
+  return mongoose.connect(!test ? uri : testUri,
+    {
+      useNewUrlParser: true,
+      useCreateIndex: true,
+      useUnifiedTopology: true,
     })
-    .catch(() => {
+    .then(() => {
+      console.log('Connected to MongoDB');
+    })
+    .catch((err) => {
       console.log('Failed to connect to MongoDB');
+
+      if (err) {
+        console.error(err);
+        process.exit(1);
+      }
     });
 }
 
