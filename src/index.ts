@@ -1,33 +1,6 @@
-import './moduleAlias';
-import dotenv from 'dotenv';
-
-import express from 'express';
-
-import bodyParser from 'body-parser';
-import swaggerUI from 'swagger-ui-express';
-import versionOneRoutes from './api/v1/index.routes';
-import swaggerDocs from './config/swagger';
-import connectToMongoDb from './config/mongo';
+import server from './server';
 import { PORT } from './constants/config';
 
-dotenv.config();
-
-const app = express();
-
-// MongoDB Setup
-connectToMongoDb();
-
-// Body Parser
-app.use(bodyParser.json());
-
-// Swagger Setup
-app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
-
-// Routes
-app.use('/api/v1', versionOneRoutes);
-
-const server = app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log(`App listening on port ${PORT}`);
 });
-
-export default server;

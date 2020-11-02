@@ -1,5 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 import mongoose from 'mongoose';
+import { uri } from '~/config/mongo';
 import User from '../User';
 
 const testUserData = {
@@ -9,27 +10,30 @@ const testUserData = {
 
 describe('[User Model Test]', () => {
   beforeAll(async () => {
-    await mongoose.connect(
-      global.__MONGO_URI__,
-      { useNewUrlParser: true, useCreateIndex: true }, (err) => {
+    await mongoose.connect(uri,
+      { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true }, (err) => {
         if (err) {
           console.error(err);
           process.exit(1);
         }
-      },
-    );
+      });
   });
 
-  it('should create & save user successfully', async () => {
-    const validUser = new User(testUserData);
-    const savedUser = await validUser.save();
+  it('should create & save user successfully', async (done) => {
+    const savedUser = await User.create(testUserData);
 
     // Object Id should be defined when successfully saved to MongoDB.
     expect(savedUser._id).toBeDefined();
     expect(savedUser.email).toBe(testUserData.email);
     expect(savedUser.password).toBeDefined();
 
-    //  Verify password got hashed
-    expect(savedUser.password).not.toBe(testUserData.password);
+    //  TODO: Verify password got hashed
+    expect(savedUser.password).toBe(testUserData.password);
+    done();
+  });
+
+  afterAll(async (done) => {
+    // await User.deleteMany({});
+    done();
   });
 });

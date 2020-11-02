@@ -4,7 +4,8 @@ import { MONGO } from '~/constants/config';
 
 const credential = MONGO.USER && MONGO.PASSWORD ? `${MONGO.USER}:${MONGO.PASSWORD}@` : '';
 
-const uri = `mongodb://${credential}${MONGO.HOST}:${MONGO.PORT}/${MONGO.DB}`;
+// If we're running test run it on local server
+export const uri = `mongodb://${credential}${MONGO.HOST}:${MONGO.PORT}/${MONGO.DB}`;
 
 mongoose.connect(uri);
 
