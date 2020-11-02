@@ -11,7 +11,7 @@ const MONGO = {
 };
 
 const MONGO_JEST = {
-  HOST: process.env.DATABASE_MONGO_HOST || 'mongo',
+  HOST: 'mongo',
   USER: '',
   PASSWORD: '',
   PORT: 27017,

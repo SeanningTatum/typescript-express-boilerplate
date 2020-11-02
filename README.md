@@ -10,6 +10,8 @@ A basic starter template for strongly typed and well documented backend with exp
 - Express Validator - [Docs](https://express-validator.github.io/docs/)
 - http-status-codes - [Docs](https://www.npmjs.com/package/http-status-codes)
 - plop - [Docs](https://github.com/plopjs/plop)
+- jest - [Docs](https://jestjs.io/)
+- supertest - [Docs](https://github.com/visionmedia/supertest)
 
 ## Features
 
@@ -19,21 +21,28 @@ A basic starter template for strongly typed and well documented backend with exp
 - Reusable and generic HTTP status codes and messages through `http-status-codes`
 - Validate Route Params and Body through `express-validator`
 - Generated boilerplate code through `plop`
+- Unit Testing through `jest`
+- Integration Testing through `supertest`
 
 ```javascript
 ├── api
-│   └── v1
-│       ├── index.routes.ts // root routes
-│       └── user // modularize routes into own files
-            //define request, response types, dto, swagger doc and logic inside each route
-│           ├── createUser.ts 
-│           ├── getUser.ts
-│           └── user.routes.ts // user root routes
+│   ├── v1 
+│   │   ├── index.routes.ts
+│   │   ├── _tests_ // Grouped Integration Tests ex. CRUD User
+│   │   └── user
+│   │       ├── _swagger_ // Swagger Definitions
+│   │       ├── _tests_ // Individual Integration Tests
+│   │       ├── createUser.ts // API Code
+│   │       └── user.routes.ts
+│   └── v2
 ├── config
-│   └── swagger.ts
-├── index.ts
-├── models 
-│   └── User.ts // swagger and type definition 
+├── constants
+├── middleware
+├── models
+│   ├── _swagger_ // Swagger Definition
+│   └── _tests_ // Unit Tests
+├── server.ts
+└── types // Typescript Types and Lib Definitions
 ```
 
 ## Setup and How to run
@@ -49,8 +58,8 @@ This command will start nodejs api and mongo service inside docker.
 | Service       | Port                                             |
 | ------------- | ------------------------------------------------ |
 | API           | [5000](https://localhost:5000)                   |
-| Swagger UI    | [5000/api-docs](https://localhost:5000/api-docs)  |
-| Mongo Express | [5001](https://localhost:5001)  |
+| Swagger UI    | [5000/api-docs](https://localhost:5000/api-docs) |
+| Mongo Express | [5001](https://localhost:5001)                   |
 | Mongo         | 27018                                            |
 
 
@@ -89,6 +98,22 @@ sean@Seans-MacBook-Pro-2 express-typescript % yarn generate
 ✔  _+ /src/api/v1/property/property.routes.ts
 ✔  _+ /src/api/v1/property/property.routes.ts
 ```
+
+### Testing
+Make sure each model has a unit test to validate the schema.
+
+```
+npm run unit-test or yarn unit-test
+```
+
+Integration Tests
+Make sure that each api has an integration test to see if authorization,
+validation is working correctly
+
+```
+npm run integration-test or yarn integration-test
+```
+
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
