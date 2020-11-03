@@ -2,7 +2,7 @@ import { Response, Request } from 'express';
 import { body } from 'express-validator';
 import { ReasonPhrases, StatusCodes } from 'http-status-codes';
 import User, { IUser } from '~/models/User';
-import { GenericError } from '~/types/Error';
+import { DuplicateError, GenericError } from '~/types/Error';
 import { GenericReturn } from '~/types/Return';
 
 interface RequestBody {
@@ -27,6 +27,13 @@ async function createUser(req: Request<{}, {}, RequestBody>, res: Response<Retur
       body: user,
     });
   } catch (error) {
+    if (error instanceof DuplicateError) {
+      return res.status(StatusCodes.UNPROCESSABLE_ENTITY).send({
+        code: StatusCodes.UNPROCESSABLE_ENTITY,
+        message: 'User with email already exists!',
+      });
+    }
+
     return res.status(error.code).json({
       code: error.code,
       message: error.message,
