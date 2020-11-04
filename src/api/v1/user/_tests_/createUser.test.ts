@@ -19,17 +19,6 @@ describe('[POST] User - createUser', () => {
       expect(res.status).toEqual(StatusCodes.OK);
       expect(res.body.code).toEqual(StatusCodes.OK);
       expect(res.body.message).toEqual(ReasonPhrases.OK);
-
-      const { email, password, _id } = res.body.body;
-
-      // Verify user has been created and sent back as a response
-      expect(_id).toBeDefined();
-      expect(email).toBe(testUser.email);
-
-      // Verify Password exists and is hashed
-      expect(password).toBeDefined();
-      expect(password).toBe(testUser.password);
-      done();
     } catch (e) {
       done(e);
     }

@@ -24,7 +24,7 @@ async function createUser(req: Request<{}, {}, RequestBody>, res: Response<Retur
     return res.status(StatusCodes.OK).json({
       code: StatusCodes.OK,
       message: ReasonPhrases.OK,
-      body: user,
+      data: user,
     });
   } catch (error) {
     if (error instanceof DuplicateError) {
