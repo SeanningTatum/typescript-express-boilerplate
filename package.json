@@ -28,6 +28,7 @@
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-import-resolver-typescript": "^2.3.0",
     "eslint-plugin-import": "^2.22.1",
+    "google-cloud-gui": "^0.2.2",
     "husky": "^4.3.0",
     "lint-staged": "^10.4.0",
     "plop": "^2.7.4",
@@ -35,12 +36,13 @@
   },
   "scripts": {
     "local-datastore": "gcloud beta emulators datastore start --data-dir=./local-datastore",
-    "dev": "concurrently \"npm run watch-ts\" \"npm run watch-deploy\"",
+    "dev": "concurrently \"npm run watch-ts\" \"npm run watch-deploy\"  \"google-cloud-gui --port=5001\" ",
     "build": "tsc -p .",
     "watch-ts": "tsc -w",
     "watch-deploy": "nodemon dist/index.js",
     "start": "node dist/index.js",
-    "generate": "plop"
+    "generate": "plop",
+    "sh:nodejs": "docker-compose exec nodejs sh"
   },
   "husky": {
     "hooks": {
