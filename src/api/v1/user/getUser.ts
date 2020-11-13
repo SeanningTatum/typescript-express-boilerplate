@@ -4,30 +4,6 @@ import { ReasonPhrases, StatusCodes } from 'http-status-codes';
 import { UserModel } from '~/models/User';
 import { GenericReturn } from '~/types/Return';
 
-/**
- * @swagger
- *
- * /api/v1/user/getUser/{id}:
- *  get:
- *    tags: [User]
- *    description: Fetches user with matching id
- *    produces: application/json
- *    parameters:
- *      - name: id
- *        in: path
- *        schema:
- *          type: string
- *        required: true
- *        description: ID of the user
- *    responses:
- *      200:
- *        description: Success
- *        schema:
- *          $ref: '#/definitions/User'
- *      400:
- *        description: Invalid Body or Params
- *
- */
 interface QueryParams {
   id: string;
 }
