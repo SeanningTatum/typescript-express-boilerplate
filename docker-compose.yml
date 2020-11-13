@@ -1,0 +1,21 @@
+version: "3"
+services:
+  database:
+    image: google/cloud-sdk
+    command: gcloud beta emulators datastore start --host-port 0.0.0.0:8000 --project emulator --store-on-disk
+    ports:
+      - 8000:8000
+
+  nodejs:
+    image: node:12.16.3-alpine
+    command: sh -c "yarn install && yarn dev"
+    ports:
+      - "5000:5000"
+    working_dir: /root/app
+    volumes:
+      - ./:/root/app:cached
+    depends_on:
+      - database
+    environment:
+      DATASTORE_EMULATOR_HOST: database:8000
+      DATASTORE_PROJECT_ID: emulator

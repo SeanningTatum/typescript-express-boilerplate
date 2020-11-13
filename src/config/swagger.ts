@@ -1,7 +1,7 @@
 import swaggerJSDoc from 'swagger-jsdoc';
 
 const localServer: swaggerJSDoc.ServerInformation = {
-  url: 'http://localhost:8080',
+  url: 'http://localhost:5000',
 };
 
 const swaggerOptions: swaggerJSDoc.Options = {
