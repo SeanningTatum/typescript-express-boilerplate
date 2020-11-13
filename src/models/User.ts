@@ -1,8 +1,8 @@
 import gstore from '~/config/gstore';
 
-interface UserType {
-    email: string;
-    password: string;
+export interface UserType {
+  email: string;
+  password: string;
 }
 
 // Pass it on Schema creation

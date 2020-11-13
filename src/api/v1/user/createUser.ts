@@ -2,9 +2,9 @@ import { Response, Request } from 'express';
 import { body } from 'express-validator';
 
 import { ReasonPhrases, StatusCodes } from 'http-status-codes';
-import UserModel from '~/models/User';
 import { GenericReturn } from '~/types/Return';
-import { GenericError } from '~/types/Error';
+import { DuplicateError, GenericError } from '~/types/Error';
+import UserController from '~/controller/User';
 
 interface RequestBody {
   email: string;
@@ -20,24 +20,38 @@ export const createUserParams = [
 
 async function createUser(
   req: Request<{}, {}, RequestBody>,
-  res: Response<GenericError |ReturnValue>,
+  res: Response<GenericError | ReturnValue>,
 ) {
   try {
-    const user = new UserModel({ email: req.body.email, password: req.body.password });
-
-    const newUser = await user.save();
+    const newUser = await UserController.createUser(req.body);
 
     return res.status(StatusCodes.OK).json({
       code: StatusCodes.OK,
       message: ReasonPhrases.OK,
-      body: newUser.plain(),
+      body: newUser,
     });
   } catch (error) {
-    console.error(error);
+    // Validation Errors
+    if (error.code && error.name) {
+      return res.status(StatusCodes.BAD_REQUEST).json({
+        code: StatusCodes.BAD_REQUEST,
+        message: error.name,
+        body: error,
+      });
+    }
+
+    if (error instanceof DuplicateError) {
+      return res.status(StatusCodes.CONFLICT).json({
+        code: StatusCodes.CONFLICT,
+        message: ReasonPhrases.CONFLICT,
+        body: error,
+      });
+    }
 
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
       code: StatusCodes.INTERNAL_SERVER_ERROR,
       message: ReasonPhrases.INTERNAL_SERVER_ERROR,
+      body: error,
     });
   }
 }
