@@ -1,23 +1,16 @@
-/**
- * @swagger
- *
- * definitions:
- *   User:
- *     type: object
- *     required:
- *       - username
- *       - password
- *     properties:
- *       id:
- *         type: string
- *         format: id
- *       username:
- *         type: string
- *       password:
- *         type: string
- *         format: password
- */
-export interface UserModel {
-    id: string;
-    username: string;
+import gstore from '~/config/gstore';
+
+interface UserType {
+    email: string;
+    password: string;
 }
+
+// Pass it on Schema creation
+const schema = new gstore.Schema<UserType>({
+  email: { type: String, validate: 'isEmail', required: true },
+  password: { type: String, excludeFromIndexes: true, required: true },
+});
+
+const User = gstore.model('User', schema);
+
+export default User;

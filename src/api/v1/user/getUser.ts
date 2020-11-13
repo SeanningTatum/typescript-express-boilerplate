@@ -1,14 +1,14 @@
 import { Request, Response } from 'express';
 import { param, ValidationChain } from 'express-validator';
 import { ReasonPhrases, StatusCodes } from 'http-status-codes';
-import { UserModel } from '~/models/User';
+// import UserModel from '~/models/User';
 import { GenericReturn } from '~/types/Return';
 
 interface QueryParams {
   id: string;
 }
 
-interface ReturnValue extends GenericReturn<UserModel> {}
+interface ReturnValue extends GenericReturn<any> {}
 
 export const getUserParams: ValidationChain[] = [
   param('id').trim().exists({ checkFalsy: true, checkNull: true }),

@@ -6,6 +6,7 @@ import bodyParser from 'body-parser';
 import swaggerUI from 'swagger-ui-express';
 import versionOneRoutes from './api/v1/index.routes';
 import swaggerDocs from './config/swagger';
+import '~/config/gstore';
 
 const PORT = Number(process.env.PORT) || 8080;
 const app = express();

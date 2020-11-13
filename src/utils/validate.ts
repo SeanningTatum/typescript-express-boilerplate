@@ -6,8 +6,8 @@ import {
 } from 'http-status-codes';
 
 interface ReturnType {
-    message: string;
-    errors: ValidationError[]
+  message: string;
+  errors: ValidationError[]
 }
 
 const validate = (validations: ValidationChain[]) => async (
