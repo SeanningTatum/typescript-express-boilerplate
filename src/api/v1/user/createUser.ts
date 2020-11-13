@@ -4,6 +4,7 @@ import { body } from 'express-validator';
 import { ReasonPhrases, StatusCodes } from 'http-status-codes';
 import UserModel from '~/models/User';
 import { GenericReturn } from '~/types/Return';
+import { GenericError } from '~/types/Error';
 
 interface RequestBody {
   email: string;
@@ -17,7 +18,10 @@ export const createUserParams = [
   body('password').exists({ checkNull: true, checkFalsy: true }),
 ];
 
-async function createUser(req: Request<{}, {}, RequestBody>, res: Response<ReturnValue>) {
+async function createUser(
+  req: Request<{}, {}, RequestBody>,
+  res: Response<GenericError |ReturnValue>,
+) {
   try {
     const user = new UserModel({ email: req.body.email, password: req.body.password });
 
